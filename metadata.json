@@ -1,0 +1,7 @@
+{
+  "name": "CMV Pro - Gestão de Restaurantes",
+  "description": "Sistema profissional de controle de Custo de Mercadoria Vendida (CMV) com dashboards em tempo real, entrada de dados por voz via IA e gestão multi-inquilino.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
