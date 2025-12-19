@@ -2,7 +2,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Category } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || 'FAKE_API_KEY_FOR_DEVELOPMENT' });
 
 export interface StructuredPurchase {
   product: string;
@@ -15,9 +15,9 @@ export const parseVoiceTranscript = async (transcript: string): Promise<Structur
   try {
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: `Extraia informações de compra de restaurante deste texto: "${transcript}". Retorne JSON.`,
+      contents: `Extraia informaÃ§Ãµes de compra de restaurante deste texto: "${transcript}". Retorne JSON.`,
       config: {
-        systemInstruction: "Você é um assistente de entrada de dados de restaurante. Analise o texto e identifique o produto, a categoria (comida ou bebida), o valor (apenas número) e a data (formato YYYY-MM-DD, use a data de hoje se não mencionada). Retorne exatamente o schema JSON solicitado.",
+        systemInstruction: "VocÃª Ã© um assistente de entrada de dados de restaurante. Analise o texto e identifique o produto, a categoria (comida ou bebida), o valor (apenas nÃºmero) e a data (formato YYYY-MM-DD, use a data de hoje se nÃ£o mencionada). Retorne exatamente o schema JSON solicitado.",
         responseMimeType: "application/json",
         responseSchema: {
           type: Type.OBJECT,
